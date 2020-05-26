@@ -21,46 +21,68 @@ Print messages:
 """
 
 
+def get_year(timestamp):
+    return int(timestamp[6:10])
+
+
+def get_month(timestamp):
+    return int(timestamp[3:5])
+
+
+def get_day(timestamp):
+    return int(timestamp[0:2])
+
+
+def get_hour(timestamp):
+    return int(timestamp[11:13])
+
+
+def get_minute(timestamp):
+    return int(timestamp[14:16])
+
+
+def get_second(timestamp):
+    return int(timestamp[17:19])
+
+
 def is_before(timestamp1, timestamp2):
-    year1 = int(timestamp1[6:10])
-    year2 = int(timestamp2[6:10])
+    # Check if timestamp1 comes before timestamp2
+    year1 = get_year(timestamp1)
+    year2 = get_year(timestamp2)
 
     if year1 < year2:
         return True
 
-    if year2 == year1:
-        month1 = int(timestamp1[3:5])
-        month2 = int(timestamp2[3:5])
+    if year1 == year2:
+        month1 = get_month(timestamp1)
+        month2 = get_month(timestamp2)
 
         if month1 < month2:
             return True
 
         if month1 == month2:
-            day1 = int(timestamp1[0:2])
-            day2 = int(timestamp2[0:2])
+            day1 = get_day(timestamp1)
+            day2 = get_day(timestamp2)
 
             if day1 < day2:
                 return True
 
             if day1 == day2:
-                hour1 = int(timestamp1[11:13])
-                hour2 = int(timestamp2[11:13])
+                hour1 = get_hour(timestamp1)
+                hour2 = get_hour(timestamp2)
 
                 if hour1 < hour2:
                     return True
 
                 if hour1 == hour2:
-                    minute1 = int(timestamp1[14:16])
-                    minute2 = int(timestamp2[14:16])
+                    minute1 = get_minute(timestamp1)
+                    minute2 = get_minute(timestamp2)
 
                     if minute1 < minute2:
                         return True
 
                     if minute1 == minute2:
-                        second1 = int(timestamp1[17:19])
-                        second2 = int(timestamp2[17:19])
-
-                        if second1 < second2:
+                        if get_second(timestamp1) < get_second(timestamp2):
                             return True
     return False
 
