@@ -43,3 +43,57 @@ Print the answer as a part of a message::
 to other fixed lines in Bangalore."
 The percentage should have 2 decimal digits
 """
+
+
+def is_bangalore_prefix(prefix):
+    return prefix == "080"
+
+
+def get_prefix(number):
+    if number[0] == '(':  # fixed lines
+        idx = 1
+        while number[idx] != ')':
+            idx += 1
+        return number[1:idx]
+
+    if number[0] == '7' or number[0] == '8' or number[0] == '9':  # mobile
+        return number[:4]
+
+    # telemarketers
+    return number[:3]
+
+
+def number_in_list(number, numbers_list):
+    for n in numbers_list:
+        if n == number:
+            return True
+    return False
+
+
+called_prefixes = []
+count_from_bangalore = 0
+count_to_bangalore = 0
+
+for call in calls:
+    calling_number = call[0]
+    receiving_number = call[1]
+
+    calling_prefix = get_prefix(calling_number)
+    if is_bangalore_prefix(calling_prefix):
+        count_from_bangalore += 1
+        receiving_prefix = get_prefix(receiving_number)
+
+        if is_bangalore_prefix(receiving_prefix):
+            count_to_bangalore += 1
+
+        if not number_in_list(receiving_prefix, called_prefixes):
+            called_prefixes.append(receiving_prefix)  # append is O(1)
+
+called_prefixes.sort()
+print("The numbers called by people in Bangalore have codes:")
+for code in called_prefixes:
+    print(code)
+
+print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore." %
+      (count_to_bangalore * 100.0 / count_from_bangalore,))
+print(count_to_bangalore, count_from_bangalore)
