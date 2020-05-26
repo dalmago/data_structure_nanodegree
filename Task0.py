@@ -87,15 +87,18 @@ def is_before(timestamp1, timestamp2):
     return False
 
 
+# Initialize result variables
 first_text = None
 last_call = None
 
+# Iterate over texts
 for text in texts:
-    if first_text is None or is_before(text[2], first_text[2]):
+    if first_text is None or is_before(text[2], first_text[2]):  # Timestamp is the third column of the CSV file
         first_text = text
 
+# Iterate over calls
 for call in calls:
-    if last_call is None or is_before(last_call[2], call[2]):
+    if last_call is None or is_before(last_call[2], call[2]):  # Timestamp is the third column of the CSV file
         last_call = call
 
 print("First record of texts, %s texts %s at time %s" % (first_text[0], first_text[1], first_text[2]))

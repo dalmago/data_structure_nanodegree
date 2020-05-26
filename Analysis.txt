@@ -1,0 +1,6 @@
+# Task 0
+
+The code written for Task 0 will iterate twice, once over the calls file and once over the texts file, each iteration
+running N times.
+Inside of each iteration, only simple instructions are executed (comparisons, function calls and attributions).
+Complexity: O(n)
