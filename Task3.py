@@ -96,4 +96,3 @@ for code in called_prefixes:
 
 print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore." %
       (count_to_bangalore * 100.0 / count_from_bangalore,))
-print(count_to_bangalore, count_from_bangalore)
