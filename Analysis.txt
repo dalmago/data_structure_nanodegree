@@ -17,8 +17,12 @@ and the list append method that has O(1) complexity).
 Complexity: O(n^2)
 
 # Task 2
-The loop through the calls only runs N times, having just simple instructions inside of it.
-Complexity: O(n)
+The first loop runs N times, executing gets and sets on a dictionary each iteration. According to Python's
+documentation, dict's get and set have a O(n) worst case complexity. Since we are running this for each iteration of the
+loop, its complexity will be O(n^2).
+Another loop is implemented later in the code to compare which number spent the longest time on the phone. But since
+all it does are simple comparisons, its complexity is O(n).
+Complexity: O(n^2)
 
 # Task 3
 The worst case scenario would be if all the calls were originated from Bangalore and each of them had different area

@@ -20,11 +20,27 @@ Print a message:
 September 2016.".
 """
 
-# Keep all the line from the longest call
+# Keep record of all numbers and its spent time
+spent_time = {}
+
+for call in calls:  # O(n)
+    calling_number = call[0]
+    receiving_number = call[1]
+
+    # If the number is not in the dictionary yet, read the spent time as zero
+    calling_sum = spent_time.get(calling_number, 0)  # O(n)
+    receiving_sum = spent_time.get(receiving_number, 0)
+
+    calling_sum += int(call[3])
+    receiving_sum += int(call[3])
+
+    spent_time[calling_number] = calling_sum  # O(n)
+    spent_time[receiving_number] = receiving_sum
+
 most_spent_time = None
-for call in calls:
-    if most_spent_time is None or int(call[3]) > int(most_spent_time[3]):
-        most_spent_time = call
+for number, time in spent_time.items():  # O(n)
+    if most_spent_time is None or time > most_spent_time[1]:
+        most_spent_time = (number, time)
 
 print("%s spent the longest time, %s seconds, on the phone during September 2016." %
-      (most_spent_time[0], most_spent_time[3]))
+      (most_spent_time[0], most_spent_time[1]))
