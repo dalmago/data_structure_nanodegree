@@ -1,6 +1,17 @@
 # Task 0
-
-The code written for Task 0 will iterate twice, once over the calls file and once over the texts file, each iteration
+The code written for Task 0 will loop twice, once over the calls file and once over the texts file, each loop
 running N times.
 Inside of each iteration, only simple instructions are executed (comparisons, function calls and attributions).
 Complexity: O(n)
+
+# Task 1
+In Task 1 also two loops are executed, each one N times. However, instead of only running simple instructions, for
+this task more loops are invoked. For this problem, the worst case scenario would be that all the phone numbers are
+unique. With that in mind, the interior of each major loop (texts and calls) consists of two verifications done by
+the function number_in_list. If each number is unique, each iteration of the major loop will add one element to the
+unique_numbers lists. Then, each call to number_in_list will take one more instruction than the last. So we could think
+as the total instructions run by the number_in_list function as an arithmetic progression having common distance 1 and
+length X, where X = 2N (each line of the input has two numbers). The sum of this arithmetic progression is given by
+(X^2 + x)/2. Thus, 2N^2 + N instructions are executed inside of each major loop (disregarding other simple instructions
+and the list append method that has O(1) complexity).
+Complexity: O(N^2)

@@ -20,6 +20,7 @@ Print a message:
 """
 
 
+# Check if number is in numbers_lists
 def number_in_list(number, numbers_list):
     for n in numbers_list:
         if n == number:
@@ -30,9 +31,10 @@ def number_in_list(number, numbers_list):
 
 # Starting as zero since the files could be empty
 counter = 0
+# Keep a list of numbers that were already checked over
 unique_numbers = []
 
-for text in texts:
+for text in texts:  # major loop
     sending_number = text[0]
     receiving_number = text[1]
 
@@ -44,7 +46,7 @@ for text in texts:
         unique_numbers.append(receiving_number)
         counter += 1
 
-for call in calls:
+for call in calls:  # major loop
     calling_number = call[0]
     receiving_number = call[1]
 
