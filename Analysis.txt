@@ -14,11 +14,11 @@ as the total instructions run by the number_in_list function as an arithmetic pr
 length X, where X = 2N (each line of the input has two numbers). The sum of this arithmetic progression is given by
 (X^2 + x)/2. Thus, 2N^2 + N instructions are executed inside of each major loop (disregarding other simple instructions
 and the list append method that has O(1) complexity).
-Complexity: O(N^2)
+Complexity: O(n^2)
 
 # Task 2
 The loop through the calls only runs N times, having just simple instructions inside of it.
-Complexity: O(N)
+Complexity: O(n)
 
 # Task 3
 The worst case scenario would be if all the calls were originated from Bangalore and each of them had different area
@@ -26,6 +26,13 @@ code destinations. Most instructions inside the loop are simple instructions or 
 complexity, except the number_in_list function. Since number_in_list runs X instructions, being X the size of the
 called_prefixes list, the total instructions number_in_list will execute is also given by the sum of an arithmetic
 progression having a common distance of 1. Hence, the loop will run (N^2 + N)/2 instructions.
-Nonetheless, after the loop there is a call to a sort function, which has complexity O(n log(n)).
-Even so, the most significant part of the complexity is still the N^2 factor.
-Complexity: O(N^2)
+Nonetheless, after the loop there is a call to a sort function, which has complexity O(n log(n)), and a loop of
+complexity O(n) to print the results. Even so, the most significant part of the complexity is still the N^2 factor.
+Complexity: O(n^2)
+
+# Task 4
+The worst case scenario is when all the calling numbers are unique, and never receive calls, send or receive texts.
+For each iteration over the N inputs, N iterations are made multiple times by number_in_list and number_in_list_element,
+making the major loop's complexity O(n^2).
+After the loop there is a call to a O(n log(n)) sorting algorithm and a O(n) loop to print the results.
+Complexity: O(n^2)

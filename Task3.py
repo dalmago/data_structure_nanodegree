@@ -91,7 +91,7 @@ for call in calls:
 
 called_prefixes.sort()  # O(n log(n))
 print("The numbers called by people in Bangalore have codes:")
-for code in called_prefixes:
+for code in called_prefixes:  # O(n)
     print(code)
 
 print("%.2f percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore." %
