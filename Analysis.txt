@@ -19,3 +19,13 @@ Complexity: O(N^2)
 # Task 2
 The loop through the calls only runs N times, having just simple instructions inside of it.
 Complexity: O(N)
+
+# Task 3
+The worst case scenario would be if all the calls were originated from Bangalore and each of them had different area
+code destinations. Most instructions inside the loop are simple instructions or call to functions that have O(1)
+complexity, except the number_in_list function. Since number_in_list runs X instructions, being X the size of the
+called_prefixes list, the total instructions number_in_list will execute is also given by the sum of an arithmetic
+progression having a common distance of 1. Hence, the loop will run (N^2 + N)/2 instructions.
+Nonetheless, after the loop there is a call to a sort function, which has complexity O(n log(n)).
+Even so, the most significant part of the complexity is still the N^2 factor.
+Complexity: O(N^2)

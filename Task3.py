@@ -79,9 +79,9 @@ for call in calls:
     receiving_number = call[1]
 
     calling_prefix = get_prefix(calling_number)
-    if is_bangalore_prefix(calling_prefix):
+    if is_bangalore_prefix(calling_prefix):  # O(1)
         count_from_bangalore += 1
-        receiving_prefix = get_prefix(receiving_number)
+        receiving_prefix = get_prefix(receiving_number)  # O(1)
 
         if is_bangalore_prefix(receiving_prefix):
             count_to_bangalore += 1
@@ -89,7 +89,7 @@ for call in calls:
         if not number_in_list(receiving_prefix, called_prefixes):
             called_prefixes.append(receiving_prefix)  # append is O(1)
 
-called_prefixes.sort()
+called_prefixes.sort()  # O(n log(n))
 print("The numbers called by people in Bangalore have codes:")
 for code in called_prefixes:
     print(code)
