@@ -20,6 +20,7 @@ Print a message:
 September 2016.".
 """
 
+# Keep all the line from the longest call
 most_spent_time = None
 for call in calls:
     if most_spent_time is None or int(call[3]) > int(most_spent_time[3]):

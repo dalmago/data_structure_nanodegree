@@ -15,3 +15,7 @@ length X, where X = 2N (each line of the input has two numbers). The sum of this
 (X^2 + x)/2. Thus, 2N^2 + N instructions are executed inside of each major loop (disregarding other simple instructions
 and the list append method that has O(1) complexity).
 Complexity: O(N^2)
+
+# Task 2
+The loop through the calls only runs N times, having just simple instructions inside of it.
+Complexity: O(N)
