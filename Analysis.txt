@@ -18,8 +18,10 @@ Complexity: O(n^2)
 
 # Task 2
 The first loop runs N times, executing gets and sets on a dictionary each iteration. According to Python's
-documentation, dict's get and set have a O(n) worst case complexity. Since we are running this for each iteration of the
-loop, its complexity will be O(n^2).
+documentation, dict's get and set have a O(n) worst case complexity. The worst case scenario for this task is when all
+phone numbers (calling and receiving) are unique, so the dictionary will have one more element at each iteration. In
+the same way as Task 1, since each input line N has two phone numbers, 2N^2 + N instructions would be executed inside
+the loop. However, since we are getting and setting each number, the resulting complexity would double -> 4N^2 + 2N.
 Another loop is implemented later in the code to compare which number spent the longest time on the phone. But since
 all it does are simple comparisons, its complexity is O(n).
 Complexity: O(n^2)
