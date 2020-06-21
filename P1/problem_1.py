@@ -1,5 +1,7 @@
-class LRU_Cache(object):
+# All operations must take O(1) time.
 
+
+class LRU_Cache(object):
     def __init__(self, capacity):
         # Initialize class variables
         pass
@@ -11,6 +13,7 @@ class LRU_Cache(object):
     def set(self, key, value):
         # Set the value if the key is not present in the cache. If the cache is at capacity remove the oldest item.
         pass
+
 
 our_cache = LRU_Cache(5)
 
