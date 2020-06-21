@@ -25,7 +25,7 @@ def find_files(suffix, path):
 
         if os.path.isfile(my_path):
             if my_path.endswith(suffix):
-                path_list.append(my_path)
+                path_list.append(my_path)  # O(1)
             return
 
         # if os.path.isdir(my_path):  # Check not really needed
