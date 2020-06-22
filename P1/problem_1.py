@@ -34,12 +34,19 @@ class LRU_Cache:
         # Point node's next.previous reference
         if node.next:
             node.next.previous = node.previous
+        else:
+            self.list_tail = node.previous
 
-            # Move it to the tail
+        # This code could be optimized, but it is easier to understand this way
+        # Move node to the tail
+        if self.list_tail:
             self.list_tail.next = node
             node.previous = self.list_tail
-            self.list_tail = node
-            node.next = None
+        else:
+            self.list_head = node
+
+        self.list_tail = node
+        node.next = None
         # else: node is already the tail
 
     def get(self, key):
@@ -83,6 +90,7 @@ class LRU_Cache:
 our_cache = LRU_Cache(5)
 
 our_cache.set(1, 1)
+print(our_cache.get(1))  # returns 1
 our_cache.set(2, 2)
 our_cache.set(3, 3)
 our_cache.set(4, 4)
