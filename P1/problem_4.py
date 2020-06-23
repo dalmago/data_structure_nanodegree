@@ -1,4 +1,10 @@
-class Group(object):
+# -*- coding: utf-8 -*-
+# problem_4.py
+# Author: Matheus Dal Mago
+# 2020
+
+
+class Group:
     def __init__(self, _name):
         self.name = _name
         self.groups = []

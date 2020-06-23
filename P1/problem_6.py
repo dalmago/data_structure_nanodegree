@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# problem_6.py
+# Author: Matheus Dal Mago
+# 2020
+
+
 class Node:
     def __init__(self, value):
         self.value = value
@@ -86,6 +92,7 @@ def union(llist_1, llist_2):
 
     return new_list
 
+
 def intersection(llist_1, llist_2):
     # Creates a new Linked List for the answer
     new_list = LinkedList()
@@ -99,8 +106,8 @@ def intersection(llist_1, llist_2):
 
     return new_list
 
-# Test case 1
 
+# Test case 1
 linked_list_1 = LinkedList()
 linked_list_2 = LinkedList()
 

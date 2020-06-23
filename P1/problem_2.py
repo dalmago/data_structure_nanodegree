@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+# problem_2.py
+# Author: Matheus Dal Mago
+# 2020
+
 import os
 
 

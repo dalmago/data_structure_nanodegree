@@ -1,3 +1,9 @@
+# -*- coding: utf-8 -*-
+# problem_5.py
+# Author: Matheus Dal Mago
+# 2020
+
+
 import hashlib
 
 def calc_hash(self):

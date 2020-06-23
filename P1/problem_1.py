@@ -1,5 +1,10 @@
-# All operations must take O(1) time.
+# -*- coding: utf-8 -*-
+# problem_1.py
+# Author: Matheus Dal Mago
+# 2020
 
+
+# All operations must take O(1) time.
 
 class Node:
     def __init__(self, key, value):
