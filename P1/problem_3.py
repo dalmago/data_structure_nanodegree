@@ -30,7 +30,7 @@ class ListNode:
         return str(self.value)
 
 
-def insert_ordered_node(head, tree_node):  # TODO: complexity?
+def insert_ordered_node(head, tree_node):  # O(n), n being the number of elements already on the list
     # Helper function that inserts tree_node into the linked list head, ordering by tree_node.freq
     list_node = ListNode(tree_node)
     if head is None:  # First element in the list
@@ -52,7 +52,7 @@ def insert_ordered_node(head, tree_node):  # TODO: complexity?
     return head
 
 
-def huffman_reduce_list(head):  # TODO: complexity?
+def huffman_reduce_list(head):
     # Helper function that takes the two elements that appear first in
     # the list and creates a new node with the sum of the frequencies
 
@@ -68,7 +68,7 @@ def huffman_reduce_list(head):  # TODO: complexity?
 
     # 4 - Create new node with the sum of the frequencies
     new_tree_node = TreeNode(first_element.freq + second_element.freq)
-    if first_element.freq < second_element.freq:
+    if first_element.freq <= second_element.freq:
         new_tree_node.left_child, new_tree_node.right_child = first_element, second_element
     else:
         new_tree_node.left_child, new_tree_node.right_child = second_element, first_element
@@ -79,7 +79,7 @@ def huffman_reduce_list(head):  # TODO: complexity?
     return huffman_reduce_list(head)
 
 
-def huffman_tree_map_leaves(tree_node, prefix, char_map):  # TODO: complexity?
+def huffman_tree_map_leaves(tree_node, prefix, char_map):  # Visit each element of the tree exactly once
     # Takes a node from the tree, a prefix (that starts out as an empty string) and a char_map (empty dictionary),
     # traverse the tree concatenating 0 in the prefix for a left node and 1 for a right node. When a leaf is reached,
     # stores the character code (prefix) in the char_map.
@@ -104,12 +104,12 @@ def huffman_encoding(data):
 
     # 2 - Create a linked list ordered by the char frequency
     list_head = None
-    for key, value in char_frequency.items():
+    for key, value in char_frequency.items():  # (N^2 + N) / 2
         tree_node = TreeNode(value, key)
         list_head = insert_ordered_node(list_head, tree_node)
 
     # 3, 4, 5 - Two nodes with minimum frequency become one
-    list_head = huffman_reduce_list(list_head)
+    list_head = huffman_reduce_list(list_head)  # (N^2 + N) / 2
     if list_head is None:
         return None, None
 
@@ -120,7 +120,7 @@ def huffman_encoding(data):
     huffman_tree_map_leaves(tree_root, "", char_map)
 
     encoded_str = ""
-    for char in data:
+    for char in data:  # O(N)
         encoded_str += char_map[char]
 
     return encoded_str, tree_root
@@ -145,7 +145,6 @@ def huffman_decoding(data, tree):
         if tree_node.left_child is None and tree_node.right_child is None:  # it is a leaf
             decoded_str += tree_node.char
             tree_node = tree  # back to the root of the tree
-            continue
 
     return decoded_str
 
@@ -171,5 +170,8 @@ if __name__ == "__main__":
 
             print("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
             print("The content of the encoded data is: {}\n".format(decoded_data))
+
+        else:
+            print("Could not encode. String empty or has invalid characters.")
 
         count += 1
