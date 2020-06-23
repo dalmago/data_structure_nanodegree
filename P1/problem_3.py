@@ -84,6 +84,8 @@ def huffman_tree_map_leaves(tree_node, prefix, char_map):  # TODO: complexity?
     # traverse the tree concatenating 0 in the prefix for a left node and 1 for a right node. When a leaf is reached,
     # stores the character code (prefix) in the char_map.
     if tree_node.left_child is None and tree_node.right_child is None:
+        if prefix == '':
+            prefix = '0'
         char_map[tree_node.char] = prefix
         return
 
@@ -116,7 +118,6 @@ def huffman_encoding(data):
     # 6, 7 - generate a code for each character
     char_map = {}
     huffman_tree_map_leaves(tree_root, "", char_map)
-    print("char_map", char_map)
 
     encoded_str = ""
     for char in data:
@@ -138,6 +139,9 @@ def huffman_decoding(data, tree):
         else:
             tree_node = tree_node.right_child
 
+        if tree_node is None:  # Special case when the tree has only the root node
+            tree_node = tree
+
         if tree_node.left_child is None and tree_node.right_child is None:  # it is a leaf
             decoded_str += tree_node.char
             tree_node = tree  # back to the root of the tree
@@ -147,19 +151,25 @@ def huffman_decoding(data, tree):
 
 
 if __name__ == "__main__":
-    codes = {}
+    count = 0
 
-    a_great_sentence = "The bird is the word"
+    # Test cases with empty strings, word with just one letter, word with the same letter repeatedly, words with all
+    # letters different
+    for sentences in ["The bird is the word", "", "arara", "b", "ccccccc", "0123456789"]:
+        print("-------------------")
+        print(f"Test case {count}:")
+        print("The size of the data is: {}".format(sys.getsizeof(sentences)))
+        print("The content of the data is: {}\n".format(sentences))
 
-    print("The size of the data is: {}\n".format(sys.getsizeof(a_great_sentence)))
-    print("The content of the data is: {}\n".format(a_great_sentence))
+        encoded_data, tree = huffman_encoding(sentences)
 
-    encoded_data, tree = huffman_encoding(a_great_sentence)
+        if encoded_data is not None and tree is not None:
+            print("The size of the encoded data is: {}".format(sys.getsizeof(int(encoded_data, base=2))))
+            print("The content of the encoded data is: {}\n".format(encoded_data))
 
-    print("The size of the encoded data is: {}\n".format(sys.getsizeof(int(encoded_data, base=2))))
-    print("The content of the encoded data is: {}\n".format(encoded_data))
+            decoded_data = huffman_decoding(encoded_data, tree)
 
-    decoded_data = huffman_decoding(encoded_data, tree)
+            print("The size of the decoded data is: {}".format(sys.getsizeof(decoded_data)))
+            print("The content of the encoded data is: {}\n".format(decoded_data))
 
-    print("The size of the decoded data is: {}\n".format(sys.getsizeof(decoded_data)))
-    print("The content of the encoded data is: {}\n".format(decoded_data))
+        count += 1

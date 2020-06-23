@@ -30,7 +30,7 @@ class ChainNode:
         self.next = None
 
     def __repr__(self):
-        return f"ChainNode({self.node})"
+        return str(self.node)
 
 
 class BlockChain:
@@ -51,6 +51,15 @@ class BlockChain:
             self.chain_tail.next = node
             self.chain_tail = node
 
+    def __repr__(self):
+        out_str = ""
+        node = self.chain_head
+        while node:
+            out_str += str(node) + " -> "
+            node = node.next
+
+        return out_str
+
 
 def get_utc_time():
     return str(datetime.datetime.utcnow())
@@ -61,3 +70,16 @@ if __name__ == "__main__":
     block_chain.add_transaction(get_utc_time(), "first transaction")
     block_chain.add_transaction(get_utc_time(), "second transaction")
     block_chain.add_transaction(get_utc_time(), "third transaction")
+
+    print(block_chain)  # All the chains
+    print(block_chain.chain_head.node.data)  # "first transaction"
+    print(block_chain.chain_head.node.hash)  # hash of "first transaction"
+
+    block_chain2 = BlockChain()  # empty block chain
+    print(block_chain2)
+
+    block_chain3 = BlockChain()
+    block_chain3.add_transaction(get_utc_time(), "")  # empty data
+    block_chain3.add_transaction(get_utc_time(), "data2")
+
+    print(block_chain3.chain_tail.node.previous_hash)  # hash of ""
