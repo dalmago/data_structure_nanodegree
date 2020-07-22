@@ -13,10 +13,10 @@ not incremented (the same position is checked more than once) but the first two 
 since it is the stop rule for the loop, exactly N comparisons will be made.
 
 At the beginning of the function, a copy of the input list is made in order to return a different list, since lists are 
-mutable in Python. This copy is not accounted in the space and time complexity, since it is not part of the sort
-algorithm.
+mutable in Python. If a function is expected to return the the sorted list, then I assume we cannot modify the original
+one. This copy also takes O(N) and space.
 
 Considering *N* to be the length of the input list:
 
 * Time complexity: O(N)
-* Space complexity: O(1) - in-place sorting
+* Space complexity: O(N)

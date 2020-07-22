@@ -16,6 +16,10 @@ iterate over all the letters.
 The *find* method of the *Trie* class finds and returns the node of a given prefix. Being *N* the length of the prefix,
 *find* iterates N times and creates a constant amount of variables.
 
+Through these iterations, it also checks if each character is already in the node's children or not. Since the children
+element is a Python dictionary, I'm considering this check to be at constant time, according to this discussion:
+https://knowledge.udacity.com/questions/282151    
+
 * Time complexity: O(N)
 * Space complexity: O(1)
 
@@ -23,8 +27,11 @@ The *find* method of the *Trie* class finds and returns the node of a given pref
 ## Suffixes method
 
 The *suffixes* method of the *TrieNode* class recursively visits all children nodes below it exactly once and
-concatenates the the possible suffixes in a list, resulting in O(N) time complexity. Considering *N* the total amount of
-letters in the Trie (equals to the amount of nodes):
+concatenates the possible suffixes in a list, resulting in O(N) time complexity, considering *N* the total amount of
+letters in the Trie (equals to the amount of nodes).
+
+The concatenation of the found results in the major list takes O(k) time, k being the length of each result list.
+In the end the sum of k will be equal to the number of final results, that is N.
 
 * Time complexity: O(N)
 

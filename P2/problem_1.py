@@ -28,6 +28,8 @@ def sqrt(number):
     Returns:
        int: Floored Square Root
     """
+    if number < 0:
+        return None
     return recursive_sqrt_helper(number, 0, number)
 
 
@@ -43,3 +45,5 @@ print("Pass" if (4 == sqrt(16)) else "Fail")
 print("Pass" if (1 == sqrt(1)) else "Fail")
 print("Pass" if (5 == sqrt(27)) else "Fail")
 print("Pass" if (1643 == sqrt(27e5)) else "Fail")
+print("Pass" if (None == sqrt(-1)) else "Fail")
+print("Pass" if (None == sqrt(-4)) else "Fail")

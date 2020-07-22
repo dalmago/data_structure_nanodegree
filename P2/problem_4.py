@@ -13,7 +13,7 @@ def sort_012(input_list):
 
     idx = 0
 
-    output_list = input_list.copy()  # not considering this copy in the algorithm's complexity
+    output_list = input_list.copy()
 
     # traverse
     while idx < first_two_idx:
