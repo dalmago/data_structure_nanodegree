@@ -16,5 +16,7 @@ At the beginning of the function, a copy of the input list is made in order to r
 mutable in Python. This copy is not accounted in the space and time complexity, since it is not part of the sort
 algorithm.
 
+Considering *N* to be the length of the input list:
+
 * Time complexity: O(N)
 * Space complexity: O(1) - in-place sorting
