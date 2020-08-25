@@ -14,7 +14,9 @@ def shortest_path(M, start, goal):
     explored_nodes = set()
 
     # Being g = current path cost from start and h = estimated distance to goal:
-    frontier = [(nodes_distance(M.intersections[start], M.intersections[goal]), 0, [start])]  # priority queue (g + h, g, node list from start)
+    element = [nodes_distance(M.intersections[start], M.intersections[goal]), 0, [start]]  # [g + h, g, node list from start]
+    frontier = [element]  # priority queue
+    frontier_dict = {start: element}  # dictionary that points to the same reference than items in the priority queue
 
     # Dictionary that keeps a node's estimate distance to the goal, to avoid calculating the same value more than once
     estimated_goal_distance = {}
@@ -23,14 +25,12 @@ def shortest_path(M, start, goal):
         dist, path_cost, node_list = heapq.heappop(frontier)  # get node in the frontier with smallest g + h so far
         current_node = node_list[-1]
 
-        if current_node in explored_nodes:
-            # If a node is added to the frontier more than once, only the one with the smallest path cost is explored
-            continue
+        # remove node from frontier dict and add to explored set
+        del frontier_dict[current_node]
+        explored_nodes.add(current_node)
 
         if current_node == goal:  # the goal node is being explored
             return node_list
-
-        explored_nodes.add(current_node)
 
         for road_to in M.roads[current_node]:  # iterate over roads
             if road_to in explored_nodes:
@@ -50,7 +50,18 @@ def shortest_path(M, start, goal):
             node_path = node_list.copy()
             node_path.append(road_to)
 
-            # add intersection to frontier
-            heapq.heappush(frontier, (node_path_cost + node_estimate_to_goal, node_path_cost, node_path))
+            if road_to in frontier_dict:
+                if node_path_cost + node_estimate_to_goal < frontier_dict[road_to][0]:  # only updates if found value is smaller
+                    # update values in priority queue
+                    frontier_dict[road_to][0] = node_path_cost + node_estimate_to_goal
+                    frontier_dict[road_to][1] = node_path_cost
+                    frontier_dict[road_to][2] = node_path
+                    heapq.heapify(frontier)
+
+            else:
+                # add intersection to frontier
+                element = [node_path_cost + node_estimate_to_goal, node_path_cost, node_path]
+                heapq.heappush(frontier, element)
+                frontier_dict[road_to] = element
 
     return None
